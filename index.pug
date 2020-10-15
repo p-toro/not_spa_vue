@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+html(lang='ja')
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    title Not SPA Vue.
+    link(rel='stylesheet', href='style.scss')
+  body(ontouchstart='')
+    header.header#js-header(data-scroll-header :class='{"is-open": isOpen}')
+      .header_inner
+        h1 Logo
+        button.header_btn#js-hamburger(@click='toggleMenu')
+          span
+          span
+          span
+        nav.header_nav#js-headerNav(@click='toggleMenu')
+          ul
+            li
+              a(href='#link01') Carousel
+            li
+              a(href='#link02') Accordion
+            li
+              a(href='#link03') Scroll Anime
+            li
+              a(href='#link04') Modal
+    .content_wrap
+      .hero.content#link01
+        .swiper-container#js-slide01
+          .swiper-wrapper
+            .swiper-slide
+              img(src='https://picsum.photos/1000/500?random=1&grayscale')
+            .swiper-slide
+              img(src='https://picsum.photos/1000/500?random=2&grayscale')
+            .swiper-slide
+              img(src='https://picsum.photos/1000/500?random=3&grayscale')
+          .swiper-pagination
+          .swiper-button-prev
+          .swiper-button-next
+
+      #js-accordion
+        dl.accordion.content#link02
+          dt(@click="toggleAccordion") Accordion Menu 1
+          dd
+            p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent odio nunc, imperdiet vitae posuere nec, rutrum sed sem. Donec ac augue non mi convallis aliquet. Morbi justo nisi, euismod ac est et, ultricies eleifend nunc. Praesent a odio ultricies, scelerisque felis eu, commodo nunc. Morbi efficitur purus in gravida condimentum. In hac habitasse platea dictumst. Aenean tincidunt mollis venenatis. Nam vestibulum semper turpis, eu malesuada elit volutpat nec. Curabitur quis posuere lectus, eget sollicitudin sapien. Curabitur laoreet, mi quis convallis finibus, neque ipsum pretium ante, tincidunt feugiat urna risus fringilla ipsum. Aliquam luctus risus nec felis convallis, sed consectetur risus mollis. Vivamus eget malesuada felis. Nam accumsan sapien vitae risus mattis, in posuere lacus elementum.
+          dt(@click="toggleAccordion") Accordion Menu 2
+          dd
+            p Quisque porta fermentum imperdiet. Duis eleifend vehicula diam, sit amet sodales mauris semper commodo. Sed ultrices leo sem, id faucibus urna lacinia sit amet. Pellentesque felis massa, lobortis et enim tempus, lacinia convallis mauris. Sed ac nulla id lectus blandit tincidunt nec non erat. Fusce imperdiet auctor suscipit. Cras maximus ac est quis rutrum. Integer ac purus quis nisl sodales euismod. Proin lacinia eleifend scelerisque. Morbi id imperdiet metus. Morbi nec nulla nulla. Nulla viverra nunc ligula, vitae bibendum nisl accumsan quis. Integer non aliquam erat. Nulla facilisi.
+          dt(@click="toggleAccordion") Accordion Menu 3
+          dd
+            p Vivamus mattis tellus eget dignissim lobortis. Duis convallis eu velit eu sollicitudin. Etiam non erat id nibh egestas ornare ac ut erat. Phasellus lacinia pellentesque purus. Aliquam eleifend convallis sapien a accumsan. Curabitur fringilla neque lectus, sit amet pellentesque urna suscipit id. Cras eu est eu nibh pulvinar sollicitudin. Curabitur ac purus tortor. Donec at aliquam metus. Vestibulum condimentum tempus hendrerit. Phasellus imperdiet dui id nisi efficitur consequat sollicitudin nec ante. Etiam a placerat ligula. Suspendisse vel dictum nisi. Pellentesque quis nulla commodo, lacinia dui gravida, gravida ex. Donec dignissim eu felis vel pulvinar.
+
+      .scrollAnime.content#link03
+        p.js-iso01.is-iso01 Object1
+        p.js-iso01.is-iso01 Object2
+        p.js-iso01.is-iso01 Object3
+
+      #js-modal
+        .btnArea.content#link04
+          button(type='button' @click='openModal') Open Modal
+
+        .modal(:class='{"is-open": isOpen}')
+          .modal_bg(@click='closeModal')
+          .modal_wrap
+            .modal_inner
+              p Cras tristique nisl non metus sagittis tempus. Etiam tristique quam at enim porta porttitor. Sed volutpat quam quis sollicitudin finibus. Pellentesque in finibus nibh, a molestie leo. Quisque quis nibh porttitor, dignissim sapien a, semper ligula.
+            .modal_closeBtn(@click='closeModal') ✕
+
+      #js-message.message.content
+        input(v-model='message' placeholder='edit me')
+        p.message_txt
+          | Message is: <em>{{ message }}</em>
+    script(src='script.ts')

@@ -1,0 +1,318 @@
+// reset
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  list-style: none;
+}
+
+// variable
+$contentMaxWidth: 1000px;
+$color-black: #333;
+$color-white: snow;
+$color-base01: #fbf0f0;
+$color-base02: #7c7575;
+$color-base03: #dfd3d3;
+
+// mixin
+@mixin border {
+  border: $color-black 1px solid;
+}
+
+@mixin large {
+  @media screen and (min-width: 768px) {
+    @content;
+  }
+}
+
+// layout
+.content {
+  margin: 0 auto 4em;
+  max-width: $contentMaxWidth;
+
+  @include large {
+    margin: 0 auto 2em;
+  }
+}
+
+// content
+body {
+  padding-top: 6em;
+  background-color: $color-base01;
+  color: $color-black;
+  font-size: 20px;
+
+  @include large {
+    font-size: 16px;
+  }
+  &.is-fixed {
+    overflow: hidden;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+  }
+}
+
+.header {
+  position: fixed;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  padding: 0.5em 1em;
+  width: 100%;
+  background-color: $color-base02;
+}
+
+.header_inner {
+  display: flex;
+  margin: 0 auto;
+  max-width: $contentMaxWidth;
+
+  justify-content: space-between;
+  align-items: center;
+  h1 {
+    color: $color-white;
+    font-size: 30px;
+  }
+}
+
+.header_btn {
+  display: block;
+  position: relative;
+  z-index: 2;
+  border: 8px solid $color-white;
+  border-radius: 3px;
+  width: 40px;
+  height: 40px;
+  background-color: $color-white;
+
+  @include large {
+    display: none;
+  }
+  span {
+    display: block;
+    position: absolute;
+    border-radius: 3px;
+    width: 100%;
+    height: 2px;
+    transition: all 0.3s ease-out;
+    background-color: $color-black;
+    &:nth-of-type(1) {
+      top: 2px;
+    }
+    &:nth-of-type(2) {
+      top: 0;
+      bottom: 0;
+      margin: auto;
+    }
+    &:nth-of-type(3) {
+      bottom: 2px;
+    }
+  }
+}
+
+.header_nav {
+  display: none;
+
+  @include large {
+    display: block;
+  }
+  ul {
+    margin-top: 3em;
+    text-align: center;
+
+    @include large {
+      display: flex;
+      margin-top: 0;
+
+      justify-content: center;
+    }
+  }
+  li {
+    padding: 2em 1em;
+
+    @include large {
+      padding: 0 1em;
+    }
+  }
+  a {
+    color: $color-white;
+    &:hover,
+    :focus {
+      text-decoration: none;
+    }
+  }
+}
+
+.is-open {
+  .header_btn span {
+    &:nth-of-type(1) {
+      transform: translateY(8px) rotate(-45deg);
+    }
+    &:nth-of-type(2) {
+      opacity: 0;
+    }
+    &:nth-of-type(3) {
+      transform: translateY(-10px) rotate(45deg);
+    }
+  }
+  .header_nav {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(30,30,30,0.8);
+  }
+}
+
+.content_wrap {
+  max-width: contentMaxWidth;
+}
+
+.swiper-container {
+  min-height: 200px;
+
+  @include large {
+    min-height: 500px;
+  }
+}
+
+.swiper-slide {
+  img {
+    width: 100%;
+  }
+}
+
+.accordion {
+  width: 100%;
+  dt {
+    padding: 1em;
+    cursor: pointer;
+    background-color: $color-base03;
+
+    @include border;
+  }
+  dd {
+    overflow: hidden;
+    height: 0;
+    transition: all 0.4s ease-out;
+    background-color: $color-white;
+
+    @include border;
+    p {
+      padding: 1em;
+    }
+  }
+}
+
+.scrollAnime {
+  & > p {
+    display: flex;
+    margin: 0 auto 5em;
+    width: 50%;
+    height: 200px;
+    transition: all 0.7s ease-out;
+    background-color: $color-white;
+
+    justify-content: center;
+    align-items: center;
+    @include border;
+    &.is-iso01 {
+      opacity: 0;
+      transform: translateY(30px)scale(0.9);
+    }
+  }
+}
+
+.btnArea {
+  button {
+    display: block;
+    margin: 0 auto;
+    padding: 1em;
+    border-radius: 30px;
+    width: 10em;
+    cursor: pointer;
+    transition: opacity 0.2s ease-out;
+    background-color: $color-base02;
+    color: $color-white;
+    font-size: 20px;
+
+    @include large {
+      font-size: 16px;
+    }
+    @include border;
+    &:hover,
+    :focus {
+      opacity: 0.8;
+    }
+  }
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 3;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  &.is-open {
+    display: block;
+  }
+}
+
+.modal_bg {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(30,30,30,0.8);
+}
+
+.modal_wrap {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  padding: 1em 1.5em;
+  width: 90vw;
+  max-width: $contentMaxWidth;
+  height: 70vh;
+  transform: translate(-50%, -50%);
+  background-color: $color-white;
+
+  @include large {
+    padding: 2em 3em;
+  }
+}
+
+.modal_closeBtn {
+  position: absolute;
+  top: 0.5rem;
+  right: 1rem;
+  cursor: pointer;
+}
+
+.modal_inner {
+  overflow-y: auto;
+  height: 100%;
+}
+
+.message {
+  text-align: center;
+  input {
+    margin-bottom: 0.5em;
+    padding: 0.5em 1em;
+    font-size: 16px;
+  }
+}
+
+.message_txt {
+  font-size: 20px;
+  em {
+    font-weight: bold;
+    font-style: normal;
+  }
+}
